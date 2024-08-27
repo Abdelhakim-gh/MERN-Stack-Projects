@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #17181f;
+  color: #ddd;
+}
+
+main {
+  max-width: 400px;
+  margin: 40px auto;
+
+}
+
+h1 {
+  text-align: center;
+  color: #eee;
+  margin: 4px;
+}
+
+h2 {
+  text-align: center;
+  color: #eee;
+  margin: 12px;
+}
+
+h3 {
+  text-align: center;
+  color: #eee;
+  margin: 16px 0;
+}
+
+form {
+  margin-top: 16px;
+}
+
+form input {
+  width: 100%;
+  background-color: transparent;
+  color: #ddd;
+  border: 2px solid #30313d;
+  padding: 4px;
+  border-radius: 8px;
+  margin: 4px 0;
+  font-size: 18px;
+}
+
+form input[type="datatime-local"] {
+  color: #777; 
+}
+
+form .basic {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+form button {
+  width: 100%;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #ddd;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+form button:hover {
+  color: #ddd;
+  background-color: #17181f;
+}
+
+div.transactions {
+  margin-top: 12px;
+}
+
+div.transaction {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 4px;
+  border-top: 1px solid #30313d;
+}
+
+div.transaction:first-child {
+  border-top: 0;
+}
+
+div.transaction div.name {
+  font-size: 1rem;
+}
+
+div.transaction div.description, div.datatime {
+  font-size: 0.8rem;
+  color: #ccc;
+  margin: 4px 0;
+}
+
+/* div.transaction  {
+  font-size: 0.8rem;
+  color: #888;
+} */
+
+div.description input[type='text'] {
+  margin-top: 4px;
+}
+
+div.right {
+  text-align: right;
+}
+
+div.price.expence {
+  color: #c11; /* Color for expense */
+}
+
+div.price.expence::after {
+  content: ' $'; /* Content after the element */
+}
+
+div.price.revenue {
+  color: #1c1; /* Color for revenue */
+}
+
+div.price.revenue::after {
+  content: ' $'; /* Content after the element */
+}
