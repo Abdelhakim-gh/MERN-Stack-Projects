@@ -1,0 +1,216 @@
+body {
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    cursor: pointer;
+}
+
+main {
+    padding: 12px;
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 40px;
+}
+
+header a.logo {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+header nav {
+    display: flex;
+    gap: 16px;
+}
+
+
+div.post {
+    display: grid;
+    /* grid-template-columns: 0.8fr 1.2fr; */
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+@media screen and (min-width: 700px) {
+    div.post {
+        grid-template-columns: 0.8fr 1.2fr;
+    }
+}
+
+div.post div.texts h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+div.post div.texts a {
+    text-decoration: none;
+    color: inherit;
+}
+
+div.post div.texts p.info {
+    margin: 8px 0;
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+}
+
+div.post div.texts p.info a.author {
+    text-decoration: none;
+    color: #333;
+}
+
+div.post div.texts p.info time {
+    font-weight: normal;
+}
+
+div.post div.text p.summary {
+    margin: 8px 0;
+    line-height: 1.2rem;
+}
+
+form.login, form.register {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input { 
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    outline: none;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    display: block;
+    background-color: #333;
+    border: 0;
+    color: white;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: white;
+    color: #333;
+    border: 2px solid #333;
+}
+
+button[type="reset"] {
+    margin: 4px 0;
+}
+
+nav.link {
+    display: flex;
+    align-content: center;
+}
+
+nav.link a {
+    background-color: #333;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+nav.link a:hover {
+    background-color: white;
+    color: #333;
+}
+
+
+
+form h2 {
+    text-align: center;
+}
+
+div.post-page div.image {
+    max-height: 400px;
+    overflow: hidden;
+    display: flex;
+}
+
+div.post-page div.image img {
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    width: 100%;
+}
+
+div.post-page a {
+    color: #333;
+    text-decoration: underline;
+}
+
+div.post-page .title {
+    text-align: center;
+    margin: 12px 0;
+}
+
+div.post-page time , .author {
+    text-align: center;
+    display: block;
+    margin-bottom: 8px;
+    color: #888;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+div.post-page div.content p {
+    line-height: 1.6rem;
+    margin-bottom: 8px;
+}
+
+div.edit-post {
+    text-align: center;
+}
+
+div.edit-post a.edit-btn {
+    background-color: #333;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 4px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+a svg {
+    vertical-align: middle;
+    height: 20px;
+}
+
+div.edit-post a.edit-btn:hover {
+    background-color: white;
+    color: #333;
+    /* border: 0px solid #333; */
+}
