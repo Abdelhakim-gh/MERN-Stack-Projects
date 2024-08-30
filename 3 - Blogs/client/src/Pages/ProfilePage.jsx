@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
+import UserPosts from "../components/UserPosts";
 
 function ProfilePage() {
   const [username, setUsername] = useState("");
@@ -63,28 +64,31 @@ function ProfilePage() {
 
   return (
     <>
-      <form className="profile" onSubmit={updateProfile}>
-        <h2>Profile</h2>
-        <input
-          type="email"
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder='Username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder='New password ?'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Update profile</button>
-      </form>
+      <div>
+        <form className="profile" onSubmit={updateProfile}>
+          <h2>Profile</h2>
+          <input
+            type="email"
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder='Username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder='New password ?'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">Update profile</button>
+        </form>
+      </div>
+      <hr />
     </>
   );
 }

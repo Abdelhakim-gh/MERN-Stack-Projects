@@ -36,12 +36,14 @@ function Header() {
   const username = userInfo?.username;
 
   return (
+    <>
     <header>
       <Link to="/" className="logo">Blogs with MERN</Link>
       <nav className='link'>
         {username ? (
           <>
-            <Link to="/profile" >@{username}</Link>
+            <Link to="/profile" >@Profile</Link>
+            <Link to="/myblogs" >My Blogs</Link>
             <Link to="/create">Create Post</Link>
             <a href="/" onClick={onLogout}>Logout</a>
             <span></span>
@@ -54,6 +56,8 @@ function Header() {
         )}
       </nav>
     </header>
+    <hr className='header-line' />
+    </>
   );
 }
 

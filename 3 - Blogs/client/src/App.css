@@ -41,6 +41,13 @@ header nav {
     gap: 16px;
 }
 
+hr.header-line {
+    margin: 0 0 40px 0 ;
+    border: 0;
+    border-top: 2px solid #333;
+    border-radius: 4px;
+}
+
 /* ************************************************************************** */
 div.post {
     display: grid;
@@ -250,3 +257,166 @@ div.edit-post a.delete-btn:hover {
     color: #333;
     /* border: 0px solid #333; */
 }
+
+/* ************************************* */
+form.profile {
+    margin-bottom: 40px;
+}
+
+
+/* *********************************************************** */
+
+div.my-blogs .table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  div.my-blogs .table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    font-weight: bold;
+  }
+  
+  div.my-blogs .table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  div.my-blogs .table th,
+  div.my-blogs .table td {
+    padding: .625em;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  div.my-blogs .table td.lable {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  div.my-blogs .table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  div.my-blogs .table tr td a {
+    display: block;
+    padding: 4px;
+    margin: 4px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  div.my-blogs .table tr td a:hover {
+    background-color: white;
+    color: #333;
+    border: none;
+  }
+  
+  @media screen and (max-width: 600px) {
+    div.my-blogs .table {
+      border: 0;
+    }
+  
+    div.my-blogs .table caption {
+      font-size: 1.3em;
+    }
+    
+    div.my-blogs .table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    div.my-blogs .table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    div.my-blogs .table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    div.my-blogs .table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a div.my-blogs .table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    div.my-blogs .table td:last-child {
+      border-bottom: 0;
+    }
+  }
+  
+/** *********************************************************************************************  */
+
+/* Container styles for centering content */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 28rem; /* Adjusted height */
+    text-align: center;
+  }
+  
+  /* Style for the icon */
+  .error-icon {
+    color: #c53030; /* Red color */
+    font-size: 3rem; /* Font size for icon */
+    margin-bottom: 12px; /* Space below the icon */
+  }
+  
+  /* Style for the title */
+  .error-title {
+    font-size: 3rem; /* Font size for title */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 1rem; /* Space below the title */
+  }
+  
+  /* Style for the message */
+  .error-message {
+    font-size: 1.25rem; /* Font size for message */
+    margin-bottom: 1.25rem; /* Space below the message */
+  }
+  
+  /* Style for the button */
+  .error-button {
+    color: white; /* Text color */
+    background-color: #333; /* Indigo background color */
+    border-radius: 0.375rem; /* Rounded corners */
+    padding: 0.5rem 0.75rem; /* Padding for button */
+    margin-top: 1rem; /* Space above the button */
+    text-decoration: none; /* Remove underline from link */
+    display: inline-block; /* Ensure the link behaves like a button */
+  }
+  
+  /* Button hover effect */
+  .error-button:hover {
+    background-color: white; /* Darker indigo on hover */
+    color: #333;
+  }
+  

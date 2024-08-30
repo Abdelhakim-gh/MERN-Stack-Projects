@@ -140,10 +140,53 @@ app.post('/api/blog', upload.single('file'), async (req, res) => {
 
 // get blogs
 app.get('/api/blogs', async (req, res) => {
-    // retrive all blogs also the author data from user table using populate()
-    const posts = await PostsModel.find().populate('author', ['username']).sort({createdAt: -1}).limit(20);
-    res.json(posts);
-});
+    const { id } = req.query;
+  
+    if (id) {
+      // If id is provided, perform authentication checks
+      const { token } = req.cookies;
+      if (!token) {
+        return res.status(401).json({ success: false, error: 'No token provided' });
+      }
+  
+      // Verify the token (assuming the same logic as before)
+      jwt.verify(token, secretkey, {}, async (err, info) => {
+        if (err) {
+          return res.status(401).json({ success: false, error: 'Invalid or expired token' });
+        }
+  
+        try {
+          // Retrieve posts based on the id
+          const posts = await PostsModel.find(
+            { author: id },
+            {
+              _id: 1,        // Include the _id field
+              title: 1,      // Include the title field
+              summary: 1,    // Include the summary field
+              createdAt: 1,  // Include the createdAt field
+              updatedAt: 1   // Include the updatedAt field
+            }
+          ).sort({ createdAt: -1 });
+          console.log(posts);
+          res.json(posts);
+        } catch (error) {
+          res.status(400).json(error.message);
+        }
+      });
+    } else {
+      // If id is not provided, skip authentication and retrieve all blogs
+      try {
+        const posts = await PostsModel.find()
+          .populate('author', ['username'])
+          .sort({ createdAt: -1 })
+          .limit(20);
+  
+        res.json(posts);
+      } catch (error) {
+        res.status(400).json(error.message);
+      }
+    }
+  });
 
 // get blog by id
 app.get('/api/blog/:id', async (req, res) => {

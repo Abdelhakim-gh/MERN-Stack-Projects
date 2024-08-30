@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {Navigate} from 'react-router-dom'
 import Editor from '../components/Editor';
+import defaultCover from '../../public/cover.png';
 
 const onClear = () => {
     setTitle('');
@@ -22,7 +23,16 @@ export const CreatePostPage = () => {
         data.set('title', title);
         data.set('summary', summary);
         data.set('content', content);
-        data.set('file', files[0])
+        // data.set('file', files[0])
+        // Check if the user provided a file, else use the default cover image
+        if (files && files[0]) {
+            data.set('file', files[0]);
+        } else {
+            // Fetch the default cover image and convert it to a Blob
+            const response = await fetch(defaultCover);
+            const blob = await response.blob();
+            data.set('file', blob, 'cover.png');
+        }
         
         const url = (import.meta.env.VITE_SERVER_URL || 'http://localhost:3001') + '/api/blog';
         const res = await fetch(url, {
