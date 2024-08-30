@@ -46,7 +46,7 @@ const __dirname = path.dirname(__filename);
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
+// test if api is working
 app.get('/api/test', (req, res) => {
     res.json({ message: 'Hello 👋 from server ! ' });
 });
@@ -88,7 +88,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// get user profile from cookie data
+// get user information {id & username} when logged in from cookie data
 app.get('/api/profile', (req, res) => {
     const { token } = req.cookies
     // if (!token) {
@@ -99,6 +99,7 @@ app.get('/api/profile', (req, res) => {
         res.json(info)
     })
 });
+
 
 // logout user 
 app.post('/api/logout', (req, res) => {
@@ -217,49 +218,104 @@ app.put('/api/blog/edit/:id', upload.single('file'), async (req, res) => {
     });
 });
 
+// delete blog / post 
+app.delete('/api/blog/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    const { token } = req.cookies;
+    jwt.verify(token, secretkey, {}, async (err, info) => {
+        if (err) {
+            return res.status(401).json({ success: false, error: 'Invalid or expired token' });
+        }
+        const post = await PostsModel.findById(id);
+        if (!post) {
+            return res.status(404).json({ success: false, error: 'Post not found' });
+        }
+        if (post.author.toString() !== info.id.toString()) {
+            return res.status(403).json({ success: false, error: 'Not authorized' });
+        }
+        await post.deleteOne();
+        res.json({ success: true, message: 'Post deleted successfully' });
+    })
+})    
 
-// app.put('/api/blog/edit/:id', upload.single('file'), async (req, res) => {
-    
-//     // check if file is empty or not then rename
-//     let newFilePath = null
-//     if (req.file) {
-//         try {
-//             console.log(req.file);
-//             // Extract the extension from the original filename
-//             const originalExtension = path.extname(req.file.originalname);
-//             // Construct the new file name with the extension
-//             newFilePath = path.join(req.file.destination, req.file.filename + originalExtension);
-//             // Rename the file on the server
-//             fs.renameSync(req.file.path, newFilePath);
-//         } catch (error) {
-//             console.error(error.message);
-//             // res.status(500).json({ error: 'File renaming failed' });
-//         }
-//     }
+// get user profile
+app.get('/api/profile/:id', async (req, res) => {
+    const { id } = req.params;
+    const { token } = req.cookies;
 
-//     // get the author of post 
-//     const { token } = req.cookies
-//     jwt.verify(token, secretkey, {}, async (err, info) => {
-//         if (err) throw err
-//         const {id, title, summary, content} = req.body
-//         const post = await PostsModel.findById(id);
-//         const isAuthor = post.author === info.id
-//         res.json({isAuthor, post, info})    
-//     })
+    // Check if the token is present in cookies
+    if (!token) {
+        return res.status(401).json({ success: false, error: 'No token provided' });
+    }
 
-//     // const { id } = req.params
-//     // const { title, summary, content } = req.body
-//     // try {
-//     //     const post = await PostsModel.findById(id);
-//     //     post.title = title;
-//     //     post.summary = summary;
-//     //     post.content = content;
-//     //     const updatedPost = await post.save();
-//     //     res.json(updatedPost);
-//     // } catch (error) {
-//     //     res.status(400).json(error.message);
-//     // }
-// });
+    // Verify the token
+    jwt.verify(token, secretkey, {}, async (err, info) => {
+        if (err) {
+            return res.status(401).json({ success: false, error: 'Invalid or expired token' });
+        }
+
+        try {
+            // Check if the user in the token matches the requested profile
+            if (info.id === id) {
+                const user = await UsersModel.findById(id);
+                if (!user) {
+                    return res.status(404).json({ success: false, error: 'User not found' });
+                }
+                // Send the user information if found
+                res.json({ success: true, data: user });
+            } else {
+                console.error("User not authorized:", info.id); // Log unauthorized access
+                return res.status(403).json({ success: false, error: 'Not authorized' });
+            }
+        } catch (error) {
+            console.error('Server error:', error.message);
+            res.status(500).json({ success: false, error: 'Server error' });
+        }
+    });
+});
+
+// update user profile
+app.put('/api/profile/:id', async (req, res) => {
+    const { id } = req.params;
+    const { token } = req.cookies;
+    const { username, email, password } = req.body;
+
+    try {
+      // Verify the JWT token
+      jwt.verify(token, secretkey, {}, async (err, info) => {
+        if (err) {
+          return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        // Check if the user is the same as the one in the token
+        if (info.id === id) {
+          const user = await UsersModel.findOne({ _id: id });
+          if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+          }
+
+          // Update the user's profile
+          user.username = username || user.username;
+          user.email = email || user.email;
+
+          // Hash the password if it's being updated
+          if (password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+          }
+
+          await user.save();
+          res.json({ success: true, message: 'Profile updated successfully', user });
+        } else {
+          console.error("User not authorized:", info.id); // Log unauthorized access
+          return res.status(403).json({ error: 'Not authorized' });
+        }
+      });
+    } catch (err) {
+      console.error('Error updating profile:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 app.listen(3001, () => {
     console.log('💻 Server is running on port 3001 ...');

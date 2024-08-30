@@ -1,11 +1,17 @@
 # Blogs
 
-### Issues
+## Overview
 
-- when blog is updated the navigation is set but the content is not showing
-- images size in the index page
+- Blogs App
+- Users can _read, create, update, delete_ posts / blogs
+- view & update profile
+- Authentication
 
-### features to implement
+## Features to implement
 
-- delete blog
-- add user profile
+- List/Table of posts of the user with 2 action **[Edit, Delete]**
+
+## User
+
+- Username: abdo
+- Password: abdo

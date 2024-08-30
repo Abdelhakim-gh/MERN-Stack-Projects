@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Navigate } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -35,6 +36,8 @@ function Register() {
         const result = await response.json();
         console.log('Register Success: ', result);
         onClear();
+        
+        window.location.href = '/login';
       } else {
         alert('Register Failed');
       }

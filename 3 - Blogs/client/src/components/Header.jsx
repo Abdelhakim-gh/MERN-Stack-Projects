@@ -6,18 +6,20 @@ function Header() {
   const { userInfo, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
-    const url = (import.meta.env.VITE_SERVER_URL || 'http://localhost:3001') + '/api/profile';
-    fetch(url, {
-      credentials: 'include',
-      method: 'GET'
-    }).then(response => {
-      if (response.ok) {
-        response.json().then(userInfo => {
-          setUserInfo(userInfo);
-        });
-      }
-    });
-  }, [setUserInfo]);
+    if (userInfo?.id !== null && userInfo?.id !== undefined && userInfo?.id.trim() !== '') {
+      const url = (import.meta.env.VITE_SERVER_URL || 'http://localhost:3001') + '/api/profile';
+      fetch(url, {
+        credentials: 'include',
+        method: 'GET'
+      }).then(response => {
+        if (response.ok) {
+          response.json().then(userInfo => {
+            setUserInfo(userInfo);
+          });
+        }
+      });
+    }
+  }, [userInfo.username, setUserInfo]);
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ function Header() {
       method: 'POST'
     }).then(() => {
       setUserInfo(null);
+      window.location.href = '/';
     });
   };
 
@@ -34,13 +37,14 @@ function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">My Blog</Link>
+      <Link to="/" className="logo">Blogs with MERN</Link>
       <nav className='link'>
         {username ? (
           <>
-            <span>@{username}</span>
+            <Link to="/profile" >@{username}</Link>
             <Link to="/create">Create Post</Link>
             <a href="/" onClick={onLogout}>Logout</a>
+            <span></span>
           </>
         ) : (
           <>

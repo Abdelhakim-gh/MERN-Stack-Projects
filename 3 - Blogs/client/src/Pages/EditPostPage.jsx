@@ -2,13 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import {Navigate, useParams} from 'react-router-dom'
 import Editor from '../components/Editor';
 
-const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-]
-
 export const EditPostPage = () => {
 
     const {id} = useParams()
@@ -57,7 +50,7 @@ export const EditPostPage = () => {
     }
 
     if (redirect) {
-        return <Navigate to={'/blog/edit/'+id}/>
+        return <Navigate to={'/blog/'+id}/>
     }
     
     return (

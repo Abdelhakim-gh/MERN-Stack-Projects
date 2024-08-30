@@ -41,7 +41,7 @@ header nav {
     gap: 16px;
 }
 
-
+/* ************************************************************************** */
 div.post {
     display: grid;
     /* grid-template-columns: 0.8fr 1.2fr; */
@@ -49,6 +49,7 @@ div.post {
     gap: 24px;
     margin-bottom: 32px;
 }
+
 @media screen and (min-width: 700px) {
     div.post {
         grid-template-columns: 0.8fr 1.2fr;
@@ -87,6 +88,22 @@ div.post div.text p.summary {
     margin: 8px 0;
     line-height: 1.2rem;
 }
+
+div.post div.image {
+    width: 100%;
+    height: 260px;
+}
+
+div.post div.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 4px;
+}
+
+
+/* ****************************************************** */
 
 form.login, form.register {
     max-width: 400px;
@@ -202,6 +219,19 @@ div.edit-post a.edit-btn {
     gap: 4px;
     text-decoration: none;
     margin-bottom: 20px;
+    margin-right: 8px;
+}
+
+div.edit-post a.delete-btn {
+    background-color: #333;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 4px;
+    text-decoration: none;
+    margin-bottom: 20px;
 }
 
 a svg {
@@ -210,6 +240,12 @@ a svg {
 }
 
 div.edit-post a.edit-btn:hover {
+    background-color: white;
+    color: #333;
+    /* border: 0px solid #333; */
+}
+
+div.edit-post a.delete-btn:hover {
     background-color: white;
     color: #333;
     /* border: 0px solid #333; */
