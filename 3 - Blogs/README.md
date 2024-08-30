@@ -10,6 +10,8 @@
 ## Features to implement
 
 - List/Table of posts of the user with 2 action **[Edit, Delete]**
+- Pop-ups effect with Toas
+- Loading effect
 
 ## User
 
