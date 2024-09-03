@@ -100,7 +100,6 @@ app.get('/api/profile', (req, res) => {
     })
 });
 
-
 // logout user 
 app.post('/api/logout', (req, res) => {
     res.cookie('token', '').json('Logged out')

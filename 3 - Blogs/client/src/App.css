@@ -57,10 +57,39 @@ div.post {
     margin-bottom: 32px;
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 715px) {
     div.post {
         grid-template-columns: 0.8fr 1.2fr;
     }
+}
+
+@media screen and (max-width: 715px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header nav.link {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    margin: 4px 0;
+  }
+
+  header a {
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 8px;
+  }
+
+  header nav {
+      display: inherit;
+      gap: 0;
+  }
 }
 
 div.post div.texts h2 {
@@ -352,7 +381,7 @@ div.my-blogs .table {
       border-bottom: 1px solid #ddd;
       display: block;
       font-size: .8em;
-      text-align: right;
+      text-align: center;
     }
     
     div.my-blogs .table td::before {
