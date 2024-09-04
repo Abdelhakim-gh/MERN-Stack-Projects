@@ -9,6 +9,9 @@ function RootLayout() {
                 <img src="/logo.png" alt="" />
                 <span>Chat Bot</span>
             </Link>
+            <div className="user">
+              user
+            </div>
         </header>
         <main>
             <Outlet />
