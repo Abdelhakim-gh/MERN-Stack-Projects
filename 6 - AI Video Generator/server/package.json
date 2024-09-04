@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@gptscript-ai/gptscript": "^0.9.5-rc5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.6.1",
+    "uniqid": "^5.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "type": "module",
+  "scripts": {
+    "server": "nodemon ./src/index.js"
+  }
+}

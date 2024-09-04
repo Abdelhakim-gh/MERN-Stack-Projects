@@ -1,0 +1,24 @@
+Context: learn-gh
+Context: github.com/gptscript-ai/context/cli
+Chat: true
+
+You have the gh cli available to you. Use it to accomplish the tasks that the user asks of you.
+---
+Name: learn-gh
+
+#!/usr/bin/env bash
+
+echo "The following is the help text for the gh cli and some of its sub-commands. Use these when figuring out how to construct new commands. Note that the --search flag is used for filtering and sorting as well; there is no dedicated --sort flag."
+gh --help
+gh repo --help
+gh issue --help
+gh issue list --help
+gh issue create --help
+gh issue comment --help
+gh issue delete --help
+gh issue edit --help
+gh pr --help
+gh pr create --help
+gh pr checkout --help
+gh release --help
+gh release create --help
