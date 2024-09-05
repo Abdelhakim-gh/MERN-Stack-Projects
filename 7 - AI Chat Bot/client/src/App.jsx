@@ -18,8 +18,8 @@ const App = () => {
               <Route path="/dashboard" element={<DashBoardPage />} />
               <Route path='/dashboard/chats/:id' element={<ChatPage />} />
             </Route>
-            <Route path="/signin" element={<SignInPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/sign-in/*" element={<SignInPage />} />
+            <Route path="/sign-up/*" element={<SignUpPage />} />
           </Route>
         </Routes>
       </Router>
