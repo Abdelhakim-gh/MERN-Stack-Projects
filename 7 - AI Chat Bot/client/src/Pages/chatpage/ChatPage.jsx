@@ -1,64 +1,76 @@
-import NewPrompt from '../../components/prompt/NewPrompt'
-import './ChatPage.css'
+import { useParams } from 'react-router-dom';
+import NewPrompt from '../../components/prompt/NewPrompt';
+import './ChatPage.css';
+import { useQuery } from '@tanstack/react-query';
+import Markdown from 'react-markdown'; // Corrected import: 'Markdown' instead of 'Mardown'
+import { IKImage } from 'imagekitio-react';
 
 function ChatPage() {
-  
+  const { id } = useParams();
+
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ['chatData', id],
+    queryFn: () =>
+      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => {
+        if (res.ok) {
+          // console.log(res.json());
+          return res.json()
+        } 
+      }),
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Something went wrong!</div>;
+
   return (
-    <>
-        <div className="chat-page">
-          <div className="wrapper">
-            <div className="chat">
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores, quidem enim? Maxime voluptatibus natus necessitatibus esse quidem debitis nisi adipisci dolores ad rerum a, nulla, officiis repellat totam, obcaecati sit.
+    <div className="chat-page">
+      <div className="wrapper">
+        <div className="chat">
+          {data?.history.map((message, i) => (
+              <div
+                key={i} 
+                className={message.role === "user" ? "message user" : "message ai"}>
+                <Markdown>
+                  {message.parts[0].text}
+                </Markdown>
               </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
-              <div className="message ai">
-                Test message from ai
-              </div>  
-              <div className="message user">
-                Test message from user
-              </div>
+          ))}
 
-              <NewPrompt />
+          {data && <NewPrompt data={data} />}
 
-              </div>
-            </div>
-          </div>
-    </>
-  )
+        </div>
+      </div>
+    </div>
+  );
+  
 }
 
-export default ChatPage
+// {data?.history.map((message, i) => (
+//   <React.Fragment key={i}>
+//     {message.image && (
+//       <IKImage 
+//         urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
+//         path={message.image}
+//         width="300"
+//         height="300"
+//         transformation={[{ height: 300, width: 300 }]}
+//         loading="lazy"
+//         lqip={{ active: true, quality: 20 }}
+//       />
+//     )}
+//     <div 
+//       className={message.role === "user" ? "message user" : "message ai"}>
+//       <Markdown>
+//         {message.parts[0].text}
+//       </Markdown>
+//     </div>
+//   </React.Fragment>
+// ))}
+
+export default ChatPage;

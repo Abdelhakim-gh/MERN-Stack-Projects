@@ -7,6 +7,15 @@ import { TypeAnimation } from 'react-type-animation';
 function HomePage() {
   const [typingStatus, setTypingStatus] = useState('human1')
 
+  // // to test if the authentication credentiels is working
+  const test = async () => {
+    const url = 'http://localhost:3001/api/test/auth'
+    await fetch(url, {
+      credentials: 'include',
+      method: 'GET',
+    })
+  }
+
   return (
     <>
       <div className="home-page">
@@ -18,6 +27,7 @@ function HomePage() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime commodi nam sequi dolorum accusantium sapiente,
           </h3>
           <Link to="/dashboard">Get Startd</Link>
+          <button onClick={test}>Test auth</button>
         </div>
         <div className="right">
           <div className="img-container">

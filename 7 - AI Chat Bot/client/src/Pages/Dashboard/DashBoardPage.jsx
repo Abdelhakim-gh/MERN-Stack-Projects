@@ -1,7 +1,57 @@
 import './DashBoardPage.css'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useAuth, useUser } from '@clerk/clerk-react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 function DashBoardPage() {
+
+  const url = import.meta.env.VITE_API_URL + '/api/chats'
+  // const {userId} = useAuth();
+
+  const navigate = useNavigate()
+
+  // Access the client
+  const queryClient = useQueryClient()
+
+  // // Queries
+  // const query = useQuery({ queryKey: ['todos'], queryFn: getTodos })
+
+  // Mutations
+  const mutation = useMutation({
+    mutationFn: (prompt) => {
+      return fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: prompt }),
+      }).then(res => res.json())
+    },
+    onSuccess: (id) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ['userChats'] })
+      navigate(`/dashboard/chats/${id}`)
+    },
+  })
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const prompt = e.target.prompt.value;
+    if (!prompt) return;
+
+    mutation.mutate(prompt);
+    // // send post request to create chat
+    // await fetch(url, {
+    //   method: 'POST',
+    //   credentials: 'include',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ text: prompt }),
+    // })
+  }
+
   return (
     <>
       <div className="dashboard-container">
@@ -26,9 +76,10 @@ function DashBoardPage() {
           </div>
         </div>
         <div className="form-container">
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <input 
               type="text" 
+              name="prompt" 
               placeholder="Ask anything..."
             />
             <button>
