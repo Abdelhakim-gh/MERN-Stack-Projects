@@ -42,7 +42,7 @@ function ChatPage() {
               </div>
           ))}
 
-          {data && <NewPrompt data={data} />}
+        <NewPrompt data={data} />
 
         </div>
       </div>
