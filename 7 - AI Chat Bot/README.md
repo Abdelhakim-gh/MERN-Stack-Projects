@@ -6,7 +6,7 @@ Fullstack MERN Application implementing a chatbot using the Google AI API 'Gemin
 
 ## Features
 
-- Authentication
+- Authentication & Authorisations to api
 - AI Questions & Answers
 - Chat History
 
@@ -24,3 +24,22 @@ Fullstack MERN Application implementing a chatbot using the Google AI API 'Gemin
 - Gemini API
 - ImageKit
 - Clerk Authentication
+
+## ScreenShots
+
+### Home page : click get started to authenticate
+
+![home page](./images/3.png)
+
+### Authentification
+
+![authentification page](./images/4.png)
+
+### Dashboard
+
+![dashboard page](./images/5.png)
+
+### Chats
+
+![user chat page](./images/brave_screenshot_localhost.png)
+![user chat page](./images/6.png)
