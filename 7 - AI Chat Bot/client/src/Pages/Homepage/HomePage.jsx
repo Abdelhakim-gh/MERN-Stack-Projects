@@ -27,7 +27,7 @@ function HomePage() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime commodi nam sequi dolorum accusantium sapiente,
           </h3>
           <Link to="/dashboard">Get Startd</Link>
-          <button onClick={test}>Test auth</button>
+          {/* <button onClick={test}>Test auth</button> */}
         </div>
         <div className="right">
           <div className="img-container">

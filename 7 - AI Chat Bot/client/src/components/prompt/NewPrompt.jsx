@@ -5,6 +5,8 @@ import { IKImage } from 'imagekitio-react';
 import model from './../../lib/gemini.js';
 import Markdown from 'react-markdown';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; // Syntax highlighting style
 
 function NewPrompt({ data }) {
   const endRef = useRef(null);
@@ -129,12 +131,29 @@ function NewPrompt({ data }) {
       {question && <div className="message user">{question}</div>}
       {answer && (
         <div className="message ai">
-          <Markdown>{answer}</Markdown>
+          <Markdown
+            components={{
+              code({ inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || '');
+                return !inline && match ? (
+                  <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" {...props}>
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          >
+            {answer}
+          </Markdown>
         </div>
       )}
 
       <div className="end-chat" ref={endRef}></div>
-
+      <div className='form-container'>
       <form className="new-from" onSubmit={handleSubmit} ref={formRef}>
         <Upload setImage={setImage} />
         <input type="file" id="file" multiple={false} hidden />
@@ -143,6 +162,7 @@ function NewPrompt({ data }) {
           <img src="/arrow.png" alt="" />
         </button>
       </form>
+      </div>
     </>
   );
 }
