@@ -233,8 +233,7 @@ app.put(
         res.status(500).json({ error: 'Server error, unable to update user chat' });
       }
     }
-  );
-  
+);
 
 // run the server
 const port = (process.env.PORT || 3001)
