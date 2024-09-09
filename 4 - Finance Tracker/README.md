@@ -1,6 +1,6 @@
 # Finance Tracker
 
-A simple app to track your finances (Expenses - / Revenues +).
+MERN app to track your finances (Expenses - / Revenues +) with clerk authentication.
 
 ## Features
 
@@ -19,3 +19,19 @@ A simple app to track your finances (Expenses - / Revenues +).
 - Mongoose
 - Node.js
 - Express.js
+
+## Screenshots
+
+### Home page
+
+![Local Image](./images/1.png)
+
+### Authentication
+
+![Local Image](./images/2.png)
+![Local Image](./images/3.png)
+
+### Operations
+
+![Local Image](./images/4.png)
+![Local Image](./images/5.png)
