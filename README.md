@@ -9,3 +9,16 @@
 5. Real Estate Agency app + Authhentication (not complete)
 6. AI video generator app (not complete)
 7. AI Chat Bot app + authentication
+
+## Technologies
+
+- MongoDB
+- Express.js
+- React.js
+- Node.js
+- TypeScript
+- Clerk
+- JSON Web Token
+- ImageKit
+- Refine
+- Gimini model API
